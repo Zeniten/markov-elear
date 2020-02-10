@@ -1,0 +1,7 @@
+[[https://howistart.org/posts/clojure/1/][How I Start. Clojure]]
+
+* Project Setup
+  This Clojure project was initialized by running:
+  #+begin_src sh
+    lein new markov-elear
+  #+end_src
