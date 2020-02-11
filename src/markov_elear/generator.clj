@@ -7,11 +7,6 @@
 (def words (streng/split example #" "))
 (def word-transitions (partition-all 3 1 words))
 
-(defn process-file
-  [fname]
-  (text->markov-chain
-   (slurp (io!/resource fname))))
-
 (defn markov-chain
   [word-transitions]
   (reduce (fn [r t]
@@ -26,6 +21,14 @@
   (let [words (streng/split s #"[\s|\n]")
         word-transitions (partition-all 3 1 words)]
     (markov-chain word-transitions)))
+
+(defn process-file
+  [fname]
+  (text->markov-chain
+   (slurp (io!/resource fname))))
+
+(def files ["quangle-wangle.txt" "monad.txt"])
+(def functional-leary (apply merge-with mengde/union (map process-file files)))
 
 (defn chain->text
   [chain]
