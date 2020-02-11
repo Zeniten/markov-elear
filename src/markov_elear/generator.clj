@@ -1,10 +1,16 @@
 (ns markov-elear.generator
   (:require [clojure.string :as streng]
-            [clojure.set :as mengde]))
+            [clojure.set :as mengde]
+            [clojure.java.io :as io!]))
 
 (def example "And the Golden Grouse And the Pobble who")
 (def words (streng/split example #" "))
 (def word-transitions (partition-all 3 1 words))
+
+(defn process-file
+  [fname]
+  (text->markov-chain
+   (slurp (io!/resource fname))))
 
 (defn markov-chain
   [word-transitions]
