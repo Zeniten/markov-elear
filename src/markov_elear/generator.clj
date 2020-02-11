@@ -5,6 +5,7 @@
 (def example "And the Golden Grouse And the Pobble who")
 (def words (streng/split example #" "))
 (def word-transitions (partition-all 3 1 words))
+
 (defn markov-chain
   [word-transitions]
   (reduce (fn [r t]
@@ -14,7 +15,8 @@
           {}
           word-transitions))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn text->markov-chain
+  [s]
+  (let [words (streng/split s #"[\s|\n]")
+        word-transitions (partition-all 3 1 words)]
+    (markov-chain word-transitions)))
